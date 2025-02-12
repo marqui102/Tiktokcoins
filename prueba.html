@@ -50,6 +50,25 @@
             color: #dc3545;
             display: none;
         }
+        .payment-methods {
+            margin-top: 20px;
+            display: none;
+        }
+        .payment-methods button {
+            margin: 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
+        .thank-you-message {
+            color: #ff8c00;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -64,6 +83,13 @@
         <button onclick="processTransfer(event)">Transfer</button>
         <p class="message" id="message"></p>
         <p class="error-popup" id="error-popup">Insufficient balance or invalid input.</p>
+        <div class="payment-methods" id="payment-methods">
+            <p>Select a payment method:</p>
+            <button onclick="confirmPayment('Visa')">Visa</button>
+            <button onclick="confirmPayment('Mastercard')">Mastercard</button>
+            <button onclick="confirmPayment('Google Pay')">Google Pay</button>
+        </div>
+        <p class="thank-you-message" id="thank-you-message">Thank you for donating and participating! More transfers in the next live stream.</p>
     </div>
 
     <script>
@@ -73,21 +99,45 @@
             event.preventDefault();
             let username = document.getElementById('username').value;
             let amount = parseInt(document.getElementById('amount').value);
-            let message = document.getElementById('message');
             let errorPopup = document.getElementById('error-popup');
-            let balanceDisplay = document.getElementById('balance');
+            let paymentMethods = document.getElementById('payment-methods');
 
             if (!username || isNaN(amount) || amount <= 0 || amount > balance) {
                 errorPopup.style.display = 'block';
-                message.style.display = 'none';
                 return;
             }
+            errorPopup.style.display = 'none';
+            paymentMethods.style.display = 'block';
+        }
+
+        function confirmPayment(method) {
+            let username = document.getElementById('username').value;
+            let amount = parseInt(document.getElementById('amount').value);
+            let message = document.getElementById('message');
+            let paymentMethods = document.getElementById('payment-methods');
+            let balanceDisplay = document.getElementById('balance');
+            let thankYouMessage = document.getElementById('thank-you-message');
 
             balance -= amount;
             balanceDisplay.textContent = balance.toLocaleString();
-            errorPopup.style.display = 'none';
+            paymentMethods.style.display = 'none';
+            let orderCode = generateOrderCode();
+            let waitTime = Math.floor(Math.random() * (100 - 20 + 1)) + 20;
             message.style.display = 'block';
-            message.textContent = `Payment of ${amount} coins to ${username} successful!`;
+            message.innerHTML = `Payment via ${method} confirmed! <br> Order Code: <strong>${orderCode}</strong><br> Coins will arrive in ~${waitTime} minutes.`;
+            
+            setTimeout(() => {
+                thankYouMessage.style.display = 'block';
+            }, 2000);
+        }
+
+        function generateOrderCode() {
+            let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 8; i++) {
+                code += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return code;
         }
     </script>
 </body>

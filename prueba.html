@@ -69,6 +69,15 @@
             margin-top: 20px;
             display: none;
         }
+        .finish-stream {
+            margin-top: 20px;
+            background-color: #87CEFA;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -90,6 +99,7 @@
             <button onclick="confirmPayment('Google Pay')">Google Pay</button>
         </div>
         <p class="thank-you-message" id="thank-you-message">Thank you for donating and participating! More transfers in the next live stream.</p>
+        <button class="finish-stream" onclick="showThankYouMessage()">Finish Stream</button>
     </div>
 
     <script>
@@ -122,7 +132,7 @@
             balanceDisplay.textContent = balance.toLocaleString();
             paymentMethods.style.display = 'none';
             let orderCode = generateOrderCode();
-            let waitTime = Math.floor(Math.random() * (100 - 20 + 1)) + 20;
+            waitTime = 720;
             message.style.display = 'block';
             message.innerHTML = `Payment via ${method} confirmed! <br> Order Code: <strong>${orderCode}</strong><br> Coins will arrive in ~${waitTime} minutes.`;
             
@@ -138,6 +148,10 @@
                 code += characters.charAt(Math.floor(Math.random() * characters.length));
             }
             return code;
+        }
+
+        function showThankYouMessage() {
+            document.getElementById('thank-you-message').style.display = 'block';
         }
     </script>
 </body>

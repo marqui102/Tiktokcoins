@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transfer coins tiktok official</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(270deg, #FE2C55, #25F4EE, #FE2C55, #25F4EE);
+            background-size: 600% 600%;
+            animation: gradientBackground 10s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .container h1 {
+            color: #007bff;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .container input[type="text"],
+        .container input[type="number"] {
+            width: 85%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container input[type="text"]:focus,
+        .container input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .container button {
+            background-color: #dc3545;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .container button:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+
+        .message {
+            background-color: #e9ffe9;
+            color: #28a745;
+            padding: 12px;
+            border: 1px solid #28a745;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .details-box {
+            background-color: #f1f1f1;
+            color: #333;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .gradient-text {
+            background: linear-gradient(270deg, #FE2C55, #25F4EE);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+        }
+
+        .loading {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .loading-bar {
+            height: 20px;
+            background-color: #007bff;
+            width: 0%;
+            border-radius: 8px;
+            transition: width 2s;
+        }
+
+        .images-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .image-box {
+            width: 70px;
+            height: 70px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-box.selected {
+            border-color: green;
+            box-shadow: inset 0 0 5px rgba(0, 255, 0, 0.5);
+        }
+
+        .image-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .popup, .error-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffcccc;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 10;
+        }
+
+        .popup h2, .error-popup h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .popup button, .error-popup button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .popup button:hover, .error-popup button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .error-popup h2 {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>coins transfer</h1>
+        <p>your balance is: 99,993,364 🪙</p>
+        <input type="text" placeholder="username" id="username">
+        <input type="number" placeholder="sum" id="amount">
+        <button onclick="processTransfer(event)">transfer</button>
+        <div class="loading" id="loading">
+            <div class="loading-bar" id="loading-bar"></div>
+        </div>
+        <div class="message" id="message"></div>
+        <div class="details-box" id="details-box"></div>
+    </div>
+
+    <div class="popup" id="popup">
+        <h2>select the payment type</h2>
+        <div class="images-container">
+            <div class="image-box" onclick="selectImage(this)">
+                <img src="https://www.visa.ro/dam/VCOM/regional/ve/romania/blogs/hero-image/visa-logo-800x450.jpg" alt="Visa">
+            </div>
+            <div class="image-box" onclick="selectImage(this)">
+                <img src="https://www.mastercard.com/content/dam/public/mastercardcom/md/ro/logos/mastercard-og-image.png" alt="Mastercard">
+            </div>
+            <div class="image-box" onclick="selectImage(this)">
+                <img src="https://static.wikia.nocookie.net/google/images/2/24/Play_Store.png/revision/latest/scale-to-width-down/150?cb=20221106121609" alt="Google Play">
+            </div>
+        </div>
+        <button onclick="confirmSelection()">next</button>
+    </div>
+
+    <div class="error-popup" id="error-popup">
+        <h2>complete all requirements</h2>
+        <button onclick="hideErrorPopup()">back</button>
+    </div>
+
+    <script>
+        var selectedImageBox = null;
+    
+        function processTransfer(event) {
+            event.preventDefault();
+
+            var username = document.getElementById('username').value;
+            var amount = document.getElementById('amount').value;
+
+            if (username === '' || amount === '' || isNaN(amount) || amount <= 0) {
+                showErrorPopup();
+                return;
+            }
+
+            showImageSelection();
+        }
+    
+        function showImageSelection() {
+            document.getElementById('popup').style.display = 'block';
+        }
+    
+        function selectImage(element) {
+            if (selectedImageBox) {
+                selectedImageBox.classList.remove('selected');
+            }
+            element.classList.add('selected');
+            selectedImageBox = element;
+        }
+    
+        function generateOrderNumber() {
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var result = '';
+            for (var i = 0; i < 8; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+    
+        function generateRandomMinutes() {
+            return Math.floor(Math.random() * (100 - 20 + 1)) + 20;
+        }
+    
+        function confirmSelection() {
+            var username = document.getElementById('username').value;
+            var amount = document.getElementById('amount').value;
+            var message = document.getElementById('message');
+            var loading = document.getElementById('loading');
+            var loadingBar = document.getElementById('loading-bar');
+            var detailsBox = document.getElementById('details-box');
+            var errorPopup = document.getElementById('error-popup');
+            var popup = document.getElementById('popup');
+    
+            if (username === '' || amount === '' || !selectedImageBox) {
+                showErrorPopup();
+                return;
+            }
+    
+            loading.style.display = 'block';
+            message.style.display = 'none';
+            detailsBox.style.display = 'none';
+            errorPopup.style.display = 'none';
+            popup.style.display = 'none';
+    
+            loadingBar.style.width = '0%';
+    
+            setTimeout(function() {
+                loadingBar.style.width = '100%';
+            }, 100);
+    
+            setTimeout(function() {
+                loading.style.display = 'none';
+                var orderNumber = generateOrderNumber();
+                var randomMinutes = generateRandomMinutes();
+                message.style.display = 'block';
+                message.style.color = '#28a745';
+                message.textContent = `payment has been placed successfully! the order number is: #${orderNumber}`;
+                detailsBox.style.display = 'block';
+                detailsBox.innerHTML = `User <span class="gradient-text">${username}</span> received in the account <span class="gradient-text">${amount}</span> coins and will reach about <span class="gradient-text">${randomMinutes}</span> minutes.`;
+    
+                document.getElementById('username').value = '';
+                document.getElementById('amount').value = '';
+                selectedImageBox.classList.remove('selected');
+                selectedImageBox = null;
+            }, 2000);
+        }
+    
+        function showErrorPopup() {
+            document.getElementById('error-popup').style.display = 'block';
+        }
+    
+        function hideErrorPopup() {
+            document.getElementById('error-popup').style.display = 'none';
+        }
+    </script>    
+</body>
+</html>

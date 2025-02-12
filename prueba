@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Coins TikTok Official</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(270deg, #FE2C55, #25F4EE);
+            background-size: 600% 600%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            width: 350px;
+        }
+        .container h1 {
+            color: #007bff;
+        }
+        .container input {
+            width: 85%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .container button {
+            background-color: #dc3545;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .message {
+            color: #28a745;
+            margin-top: 20px;
+            display: none;
+        }
+        .error-popup {
+            color: #dc3545;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let balance = parseInt(prompt("Set your initial balance:", "1000000")) || 0;
+    </script>
+    <div class="container">
+        <h1>Coins Transfer</h1>
+        <p>Your balance is: <span id="balance"></span> 🪙</p>
+        <input type="text" placeholder="Username" id="username">
+        <input type="number" placeholder="Amount" id="amount">
+        <button onclick="processTransfer(event)">Transfer</button>
+        <p class="message" id="message"></p>
+        <p class="error-popup" id="error-popup">Insufficient balance or invalid input.</p>
+    </div>
+
+    <script>
+        document.getElementById('balance').textContent = balance.toLocaleString();
+
+        function processTransfer(event) {
+            event.preventDefault();
+            let username = document.getElementById('username').value;
+            let amount = parseInt(document.getElementById('amount').value);
+            let message = document.getElementById('message');
+            let errorPopup = document.getElementById('error-popup');
+            let balanceDisplay = document.getElementById('balance');
+
+            if (!username || isNaN(amount) || amount <= 0 || amount > balance) {
+                errorPopup.style.display = 'block';
+                message.style.display = 'none';
+                return;
+            }
+
+            balance -= amount;
+            balanceDisplay.textContent = balance.toLocaleString();
+            errorPopup.style.display = 'none';
+            message.style.display = 'block';
+            message.textContent = `Payment of ${amount} coins to ${username} successful!`;
+        }
+    </script>
+</body>
+</html>

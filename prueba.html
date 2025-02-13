@@ -246,8 +246,10 @@ document.getElementById('balance').textContent = balance.toLocaleString(); // Mu
     let progressContainer = document.getElementById('progressContainer');
     let progressBar = document.getElementById('progressBar');
 
-            if (username === '' || amount === '' || isNaN(amount) || amount <= 0) {
-                showErrorPopup();
+          
+    if (!username || isNaN(amount) || amount <= 0 || amount > balance || !selectedPaymentMethod) {
+        message.style.color = 'red';               
+        showErrorPopup();
                 return;
             }
 

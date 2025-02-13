@@ -362,9 +362,7 @@ document.getElementById('balance').textContent = balance.toLocaleString(); // Mu
             document.getElementById('error-popup').style.display = 'none';
         }
         function finishStream() {
-        let message = document.getElementById("thankYouMessage");
-            message.textContent = "Thank you for your donations! We will continue in the next stream.";
-            message.style.display = "block";
+        window.location.href = "thankyou.html"; 
             
 }
 

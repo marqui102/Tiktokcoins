@@ -304,6 +304,8 @@ document.getElementById('balance').textContent = balance.toLocaleString(); // Mu
             }, 100);
     
             setTimeout(function() {
+                balance -= amount;  // Restar la cantidad transferida
+                document.getElementById('balance').textContent = balance.toLocaleString();
                 loading.style.display = 'none';
                 var orderNumber = generateOrderNumber();
                 var randomMinutes = 720;

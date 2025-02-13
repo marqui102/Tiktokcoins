@@ -195,22 +195,24 @@
         .error-popup h2 {
             color: #dc3545;
         }
-        .finish-button {
-            position: fixed;
-            bottom: 2px;
-            right: 20px;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 2px;
-            background: #222;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            color: transparent;
-            background-clip: text;
-            -webkit-background-clip: text;
-            background-image: linear-gradient(45deg, #FF416C, #FF4B2B);
-}
+            .finish-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: linear-gradient(45deg, #FE2C55, #25F4EE);
+        color: white;
+        transition: 0.3s;
+    }
+
+    .finish-button:hover {
+        transform: scale(1.1);
+    }
     </style>
 </head>
 <body>
@@ -225,8 +227,7 @@
         </div>
         <div class="message" id="message"></div>
         <div class="details-box" id="details-box"></div>
-        <button class="finish-button" onclick="finishStream()">FINISH STREAM</button>
-        <p id="thankYouMessage" style="display: none; font-weight: bold;"></p>
+    
 
     </div>
 
@@ -357,5 +358,7 @@ document.getElementById('balance').textContent = balance.toLocaleString(); // Mu
 }
 
     </script>    
+        <button class="finish-button" onclick="finishStream()">FINISH STREAM</button>
+        <p id="thankYouMessage" style="display: none; font-weight: bold;"></p>
 </body>
 </html>

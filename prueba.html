@@ -6,183 +6,104 @@
     <title>Transfer Coins TikTok Official</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-        @keyframes gradientBackground {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(270deg, #FE2C55, #25F4EE, #FE2C55, #25F4EE);
-            background-size: 600% 600%;
-            animation: gradientBackground 10s ease infinite;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            background: linear-gradient(270deg, #FE2C55, #25F4EE);
+            background-size: 600% 600%;
+            animation: gradientBackground 10s ease infinite;
         }
-
         .container {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 30px;
             border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             text-align: center;
             width: 350px;
-            backdrop-filter: blur(10px);
-            position: relative;
         }
-
         .container h1 {
             color: #007bff;
-            font-size: 28px;
-            margin-bottom: 20px;
         }
-
-        .container p {
-            font-size: 16px;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .container input {
+        .container input, .container button {
             width: 85%;
             padding: 12px;
             margin: 12px 0;
-            border: 1px solid #ccc;
             border-radius: 8px;
-            transition: border-color 0.3s;
-            font-family: 'Poppins', sans-serif;
         }
-
-        .container input:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-
         .container button {
             background-color: #dc3545;
             color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
         }
-
-        .container button:hover {
-            background-color: #c82333;
-            transform: scale(1.05);
-        }
-
-        .message {
-            background-color: #e9ffe9;
-            color: #28a745;
-            padding: 12px;
-            border: 1px solid #28a745;
-            border-radius: 8px;
+        .images-container {
+            display: flex;
+            justify-content: space-between;
             margin-top: 20px;
-            display: none;
-            animation: fadeIn 0.5s;
         }
-
-        .error-popup {
-            background-color: #ffcccc;
-            color: #dc3545;
-            padding: 12px;
+        .image-box {
+            width: 70px;
+            height: 70px;
+            background-color: #fff;
+            border: 1px solid #ccc;
             border-radius: 8px;
-            margin-top: 10px;
-            display: none;
-        }
-
-        .payment-methods {
-            margin-top: 20px;
-            display: none;
-        }
-
-        .payment-methods button {
-            margin: 5px;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
+            overflow: hidden;
             cursor: pointer;
-            background-color: #007bff;
-            color: white;
-            font-weight: 600;
-            transition: background-color 0.3s, transform 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
-        .payment-methods button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
+        .image-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
     </style>
 </head>
 <body>
-    <script>
-        let balance = parseInt(prompt("Set your initial balance:", "1000000")) || 0;
-    </script>
     <div class="container">
         <h1>Coins Transfer</h1>
-        <p>Your balance is: <span id="balance"></span> 🪙</p>
-        <input type="text" placeholder="Username" id="username">
-        <input type="number" placeholder="Amount" id="amount">
+        <p>Your balance is: <span id="balance">0</span> 🪙</p>
+        <input type="text" placeholder="username" id="username">
+        <input type="number" placeholder="sum" id="amount">
         <button onclick="processTransfer(event)">Transfer</button>
-        <p class="message" id="message"></p>
-        <p class="error-popup" id="error-popup">Insufficient balance or invalid input.</p>
-        <div class="payment-methods" id="payment-methods">
-            <p>Select a payment method:</p>
-            <button onclick="confirmPayment('Visa')">Visa</button>
-            <button onclick="confirmPayment('Mastercard')">Mastercard</button>
-            <button onclick="confirmPayment('Google Pay')">Google Pay</button>
+        <div class="message" id="message"></div>
+        <div class="images-container">
+            <div class="image-box">
+                <img src="https://www.visa.ro/dam/VCOM/regional/ve/romania/blogs/hero-image/visa-logo-800x450.jpg" alt="Visa">
+            </div>
+            <div class="image-box">
+                <img src="https://www.mastercard.com/content/dam/public/mastercardcom/md/ro/logos/mastercard-og-image.png" alt="Mastercard">
+            </div>
+            <div class="image-box">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRJIOTgCva6nywrmxV-DDoVpyDF2VMSKg12g&s" alt="Google Play">
+            </div>
         </div>
     </div>
 
     <script>
+        let balance = Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000;
         document.getElementById('balance').textContent = balance.toLocaleString();
 
         function processTransfer(event) {
             event.preventDefault();
             let username = document.getElementById('username').value;
             let amount = parseInt(document.getElementById('amount').value);
-            let errorPopup = document.getElementById('error-popup');
-            let paymentMethods = document.getElementById('payment-methods');
-
+            let message = document.getElementById('message');
+            
             if (!username || isNaN(amount) || amount <= 0 || amount > balance) {
-                errorPopup.style.display = 'block';
+                message.style.color = 'red';
+                message.textContent = 'Invalid transfer amount or username!';
                 return;
             }
-            errorPopup.style.display = 'none';
-            paymentMethods.style.display = 'block';
-        }
-
-        function confirmPayment(method) {
-            let amount = parseInt(document.getElementById('amount').value);
-            let message = document.getElementById('message');
-            let paymentMethods = document.getElementById('payment-methods');
-            let balanceDisplay = document.getElementById('balance');
-
+            
             balance -= amount;
-            balanceDisplay.textContent = balance.toLocaleString();
-            paymentMethods.style.display = 'none';
-            let orderCode = generateOrderCode();
-            let waitTime = 720;
-            message.style.display = 'block';
-            message.innerHTML = `Payment via ${method} confirmed! <br> Order Code: <strong>${orderCode}</strong><br> Coins will arrive in ~${waitTime} minutes.`;
-        }
-
-        function generateOrderCode() {
-            let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let code = '';
-            for (let i = 0; i < 8; i++) {
-                code += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            return code;
+            document.getElementById('balance').textContent = balance.toLocaleString();
+            
+            message.style.color = 'green';
+            message.textContent = `Successfully transferred ${amount} coins to ${username}!`;
         }
     </script>
 </body>

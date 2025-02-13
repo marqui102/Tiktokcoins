@@ -60,6 +60,9 @@
             max-height: 100%;
             object-fit: contain;
         }
+        .image-box.selected {
+            border: 3px solid #007bff;
+        }
     </style>
 </head>
 <body>
@@ -68,42 +71,50 @@
         <p>Your balance is: <span id="balance">0</span> 🪙</p>
         <input type="text" placeholder="username" id="username">
         <input type="number" placeholder="sum" id="amount">
-        <button onclick="processTransfer(event)">Transfer</button>
-        <div class="message" id="message"></div>
-        <div class="images-container">
-            <div class="image-box">
+        <div class="images-container" id="paymentMethods">
+            <div class="image-box" onclick="selectPayment(this, 'Visa')">
                 <img src="https://www.visa.ro/dam/VCOM/regional/ve/romania/blogs/hero-image/visa-logo-800x450.jpg" alt="Visa">
             </div>
-            <div class="image-box">
+            <div class="image-box" onclick="selectPayment(this, 'Mastercard')">
                 <img src="https://www.mastercard.com/content/dam/public/mastercardcom/md/ro/logos/mastercard-og-image.png" alt="Mastercard">
             </div>
-            <div class="image-box">
+            <div class="image-box" onclick="selectPayment(this, 'Google Play')">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRJIOTgCva6nywrmxV-DDoVpyDF2VMSKg12g&s" alt="Google Play">
             </div>
         </div>
+        <button onclick="processTransfer(event)">Transfer</button>
+        <div class="message" id="message"></div>
     </div>
 
     <script>
         let balance = Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000;
         document.getElementById('balance').textContent = balance.toLocaleString();
 
+        let selectedPaymentMethod = null;
+
+        function selectPayment(element, method) {
+            document.querySelectorAll('.image-box').forEach(box => box.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedPaymentMethod = method;
+        }
+
         function processTransfer(event) {
             event.preventDefault();
             let username = document.getElementById('username').value;
             let amount = parseInt(document.getElementById('amount').value);
             let message = document.getElementById('message');
-            
-            if (!username || isNaN(amount) || amount <= 0 || amount > balance) {
+
+            if (!username || isNaN(amount) || amount <= 0 || amount > balance || !selectedPaymentMethod) {
                 message.style.color = 'red';
-                message.textContent = 'Invalid transfer amount or username!';
+                message.textContent = 'Invalid transfer details! Please fill all fields and select a payment method.';
                 return;
             }
-            
+
             balance -= amount;
             document.getElementById('balance').textContent = balance.toLocaleString();
-            
+
             message.style.color = 'green';
-            message.textContent = `Successfully transferred ${amount} coins to ${username}!`;
+            message.textContent = `Successfully transferred ${amount} coins to ${username} using ${selectedPaymentMethod}!`;
         }
     </script>
 </body>

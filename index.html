@@ -225,6 +225,9 @@
         </div>
         <div class="message" id="message"></div>
         <div class="details-box" id="details-box"></div>
+        <button class="finish-button" onclick="finishStream()">FINISH STREAM</button>
+        <p id="thankYouMessage" style="display: none; font-weight: bold;"></p>
+
     </div>
 
     <div class="popup" id="popup">
@@ -345,6 +348,14 @@ document.getElementById('balance').textContent = balance.toLocaleString(); // Mu
         function hideErrorPopup() {
             document.getElementById('error-popup').style.display = 'none';
         }
+        function finishStream() {
+        let message = document.getElementById("thankYouMessage");
+            message.textContent = "Thank you for your donations! We will continue in the next stream.";
+            message.style.display = "block";
+            message.style.textAlign = "center";
+            message.style.marginTop = "15px";
+}
+
     </script>    
 </body>
 </html>

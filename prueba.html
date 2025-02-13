@@ -6,33 +6,63 @@
     <title>Transfer Coins TikTok Official</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(270deg, #FE2C55, #25F4EE);
+            background: linear-gradient(270deg, #FE2C55, #25F4EE, #FE2C55, #25F4EE);
             background-size: 600% 600%;
+            animation: gradientBackground 10s ease infinite;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
+
         .container {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 30px;
             border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             text-align: center;
             width: 350px;
+            backdrop-filter: blur(10px);
+            position: relative;
         }
+
         .container h1 {
             color: #007bff;
+            font-size: 28px;
+            margin-bottom: 20px;
         }
+
+        .container p {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
         .container input {
             width: 85%;
             padding: 12px;
             margin: 12px 0;
             border: 1px solid #ccc;
             border-radius: 8px;
+            transition: border-color 0.3s;
+            font-family: 'Poppins', sans-serif;
         }
+
+        .container input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
         .container button {
             background-color: #dc3545;
             color: white;
@@ -40,20 +70,41 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
         }
+
+        .container button:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+
         .message {
+            background-color: #e9ffe9;
             color: #28a745;
+            padding: 12px;
+            border: 1px solid #28a745;
+            border-radius: 8px;
             margin-top: 20px;
             display: none;
+            animation: fadeIn 0.5s;
         }
+
         .error-popup {
+            background-color: #ffcccc;
             color: #dc3545;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
             display: none;
         }
+
         .payment-methods {
             margin-top: 20px;
             display: none;
         }
+
         .payment-methods button {
             margin: 5px;
             padding: 10px;
@@ -62,21 +113,13 @@
             cursor: pointer;
             background-color: #007bff;
             color: white;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
         }
-        .thank-you-message {
-            color: #ff8c00;
-            font-weight: bold;
-            margin-top: 20px;
-            display: none;
-        }
-        .finish-stream {
-            margin-top: 20px;
-            background-color: #87CEFA;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
+
+        .payment-methods button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -98,8 +141,6 @@
             <button onclick="confirmPayment('Mastercard')">Mastercard</button>
             <button onclick="confirmPayment('Google Pay')">Google Pay</button>
         </div>
-        <p class="thank-you-message" id="thank-you-message">Thank you for donating and participating! More transfers in the next live stream.</p>
-        <button class="finish-stream" onclick="showThankYouMessage()">Finish Stream</button>
     </div>
 
     <script>
@@ -121,24 +162,18 @@
         }
 
         function confirmPayment(method) {
-            let username = document.getElementById('username').value;
             let amount = parseInt(document.getElementById('amount').value);
             let message = document.getElementById('message');
             let paymentMethods = document.getElementById('payment-methods');
             let balanceDisplay = document.getElementById('balance');
-            let thankYouMessage = document.getElementById('thank-you-message');
 
             balance -= amount;
             balanceDisplay.textContent = balance.toLocaleString();
             paymentMethods.style.display = 'none';
             let orderCode = generateOrderCode();
-            waitTime = 720;
+            let waitTime = 720;
             message.style.display = 'block';
             message.innerHTML = `Payment via ${method} confirmed! <br> Order Code: <strong>${orderCode}</strong><br> Coins will arrive in ~${waitTime} minutes.`;
-            
-            setTimeout(() => {
-                thankYouMessage.style.display = 'block';
-            }, 2000);
         }
 
         function generateOrderCode() {
@@ -148,10 +183,6 @@
                 code += characters.charAt(Math.floor(Math.random() * characters.length));
             }
             return code;
-        }
-
-        function showThankYouMessage() {
-            document.getElementById('thank-you-message').style.display = 'block';
         }
     </script>
 </body>

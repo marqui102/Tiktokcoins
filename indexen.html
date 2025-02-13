@@ -200,7 +200,7 @@
 <body>
     <div class="container">
         <h1>Coins Transfer</h1>
-        <p>your balance is: 99,993,364 🪙</p>
+        <p>Your balance is:<span id="balance">0</span> 🪙</p>
         <input type="text" placeholder="username" id="username">
         <input type="number" placeholder="sum" id="amount">
         <button onclick="processTransfer(event)">transfer</button>
@@ -212,7 +212,7 @@
     </div>
 
     <div class="popup" id="popup">
-        <h2>select the payment type</h2>
+        <h2>Select the payment type</h2>
         <div class="images-container">
             <div class="image-box" onclick="selectImage(this)">
                 <img src="https://www.visa.ro/dam/VCOM/regional/ve/romania/blogs/hero-image/visa-logo-800x450.jpg" alt="Visa">
@@ -233,6 +233,8 @@
     </div>
 
     <script>
+        let balance = Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000; 
+document.getElementById('balance').textContent = balance.toLocaleString(); // Muestra el balance en la página
         var selectedImageBox = null;
     
         function processTransfer(event) {

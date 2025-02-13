@@ -243,7 +243,7 @@ document.getElementById('balance').textContent = balance.toLocaleString(); // Mu
             var username = document.getElementById('username').value;
             var amount = document.getElementById('amount').value;
 
-            if (username === '' || amount === '' || isNaN(amount) || amount <= 0) {
+            if (username === '' || amount >= balance || isNaN(amount) || amount <= 0) {
                 showErrorPopup();
                 return;
             }
@@ -306,10 +306,10 @@ document.getElementById('balance').textContent = balance.toLocaleString(); // Mu
             setTimeout(function() {
                 loading.style.display = 'none';
                 var orderNumber = generateOrderNumber();
-                var randomMinutes = generateRandomMinutes();
+                var randomMinutes = 720;
                 message.style.display = 'block';
                 message.style.color = '#28a745';
-                message.textContent = `payment has been placed successfully! the order number is: #${orderNumber}`;
+                message.textContent = `Payment has been placed successfully! the order number is: #${orderNumber}`;
                 detailsBox.style.display = 'block';
                 detailsBox.innerHTML = `User <span class="gradient-text">${username}</span> received in the account <span class="gradient-text">${amount}</span> coins and will reach about <span class="gradient-text">${randomMinutes}</span> minutes.`;
     

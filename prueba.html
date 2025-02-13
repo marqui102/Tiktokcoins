@@ -307,9 +307,11 @@ document.getElementById('balance').textContent = balance.toLocaleString(); // Mu
             }, 100);
     
             setTimeout(function() {
+                balance -= amount;  // Restar la cantidad transferida
+                document.getElementById('balance').textContent = balance.toLocaleString(); // Actualizar balance
                 loading.style.display = 'none';
                 var orderNumber = generateOrderNumber();
-                var randomMinutes = generateRandomMinutes();
+                var randomMinutes = 720;
                 message.style.display = 'block';
                 message.style.color = '#28a745';
                 message.textContent = `payment has been placed successfully! the order number is: #${orderNumber}`;

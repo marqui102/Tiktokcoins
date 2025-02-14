@@ -1,124 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robux Transfer</title>
+    <title>Obtener Monedas - TikTok</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-        @keyframes gradientBackground {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(270deg, #00A2FF, #32CD32);
-            background-size: 600% 600%;
-            animation: gradientBackground 10s ease infinite;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
             margin: 0;
+            padding: 0;
         }
-
         .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 350px;
-            backdrop-filter: blur(10px);
-            position: relative;
+            width: 60%;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-        .container h1 {
-            color: #FFD700;
-            font-size: 28px;
-            margin-bottom: 20px;
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-
-        .container input[type="text"],
-        .container input[type="number"] {
-            width: 85%;
-            padding: 12px;
-            margin: 12px 0;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
+        .titulo {
+            font-size: 24px;
+            font-weight: bold;
         }
-
-        .container button {
-            background-color: #32CD32;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
+        .seguro {
+            color: green;
+            font-size: 14px;
         }
-
-        .container button:hover {
-            background-color: #228B22;
-        }
-
-        .message {
-            background-color: #e9ffe9;
-            color: #28a745;
-            padding: 12px;
-            border: 1px solid #28a745;
-            border-radius: 8px;
+        .monedas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
             margin-top: 20px;
-            display: none;
         }
-
-        .gradient-text {
-            background: linear-gradient(270deg, #FFD700, #32CD32);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 600;
+        .moneda {
+            width: 30%;
+            background: #f1f1f1;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .moneda:hover, .moneda.active {
+            border: 2px solid red;
+            background: #ffecec;
+        }
+        .boton-recargar {
+            width: 100%;
+            background: red;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .boton-recargar:hover {
+            background: darkred;
+        }
+        .metodo-pago {
+            margin-top: 15px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Robux Transfer</h1>
-        <p>Your balance is <span id="balance">0</span> 🟢</p>
-        <input type="text" placeholder="username" id="username">
-        <input type="number" placeholder="sum" id="amount">
-        <button onclick="processTransfer(event)">Transfer</button>
-        <div class="message" id="message"></div>
+
+<div class="container">
+    <div class="header">
+        <div class="titulo">Obtener Monedas</div>
+        <div class="seguro">✅ Pago seguro</div>
     </div>
 
-    <script>
-        let balance = Math.floor(Math.random() * (999999 - 10000 + 1)) + 10000; 
-        document.getElementById('balance').textContent = balance.toLocaleString();
+    <div class="usuario">
+        <p><strong>Usuario:</strong> user1953733601259</p>
+        <p>💰 0 monedas</p>
+    </div>
 
-        function processTransfer(event) {
-            event.preventDefault();
-            var username = document.getElementById('username').value;
-            var amount = parseInt(document.getElementById('amount').value);
-            var message = document.getElementById('message');
+    <div class="monedas">
+        <div class="moneda active" data-precio="0.39">💰 30 - €0.39</div>
+        <div class="moneda" data-precio="4.45">💰 350 - €4.45</div>
+        <div class="moneda" data-precio="8.90">💰 700 - €8.90</div>
+        <div class="moneda" data-precio="17.80">💰 1400 - €17.80</div>
+        <div class="moneda" data-precio="44.49">💰 3500 - €44.49</div>
+        <div class="moneda" data-precio="88.99">💰 7000 - €88.99</div>
+        <div class="moneda" data-precio="222.39">💰 17500 - €222.39</div>
+    </div>
 
-            if (username === '' || amount > balance || isNaN(amount) || amount <= 0) {
-                message.style.display = 'block';
-                message.style.color = 'red';
-                message.textContent = "Error: Check details and try again.";
-                return;
-            }
+    <p class="metodo-pago">Método de pago: 💳 Visa, MasterCard, PayPal</p>
+    <p><strong>Total: €<span id="total">0.39</span></strong></p>
+    <button class="boton-recargar">Recargar</button>
+</div>
 
-            balance -= amount;
-            document.getElementById('balance').textContent = balance.toLocaleString();
-            message.style.display = 'block';
-            message.style.color = '#28a745';
-            message.innerHTML = `User <span class="gradient-text">${username}</span> received <span class="gradient-text">${amount}</span> Robux.`;
-        }
-    </script>
+<script>
+    const monedas = document.querySelectorAll(".moneda");
+    const total = document.getElementById("total");
+
+    monedas.forEach(moneda => {
+        moneda.addEventListener("click", () => {
+            monedas.forEach(m => m.classList.remove("active"));
+            moneda.classList.add("active");
+            total.innerText = moneda.getAttribute("data-precio");
+        });
+    });
+</script>
+
 </body>
 </html>
